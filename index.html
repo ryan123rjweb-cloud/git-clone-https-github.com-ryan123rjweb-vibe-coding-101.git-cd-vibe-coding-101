@@ -39,6 +39,9 @@
           <button id="autoSuggestBtn" class="btn btn-primary" title="Sort all games by algorithmic model edge">
             <span class="btn-icon">⚡</span> Auto-Rank by Suggestions
           </button>
+          <button id="cbsModalBtn" class="btn btn-cbs" title="CBS Sports Locked Spreads Mode & Sync Helper">
+            <span class="btn-icon">🔒</span> CBS Pool Sync
+          </button>
           <button id="addGameBtn" class="btn btn-secondary">
             <span class="btn-icon">➕</span> Add Game
           </button>
@@ -104,6 +107,7 @@
           <button class="tab active" data-tab="all">All Matchups</button>
           <button class="tab" data-tab="ranked">Confidence Board (Sorted)</button>
           <button class="tab" data-tab="suggestions">Model Edge Picks</button>
+          <button class="tab" data-tab="cbs">🔒 CBS Locked Value (CLV)</button>
           <button class="tab" data-tab="underdogs">Value Underdogs</button>
         </div>
 
@@ -194,6 +198,66 @@
         <div class="export-actions">
           <button id="copyExportBtn" class="btn btn-primary">Copy to Clipboard</button>
           <button id="downloadJsonBtn" class="btn btn-secondary">Download JSON</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CBS Sports Pool Integration Modal -->
+  <div id="cbsModal" class="modal-overlay hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div>
+          <h3 class="modal-title">🔒 CBS Sports Locked Spreads Mode</h3>
+          <p class="modal-subtitle">Sync locked pool lines & capitalize on Closing Line Value (CLV)</p>
+        </div>
+        <button id="closeCbsModal" class="modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="cbs-info-banner">
+          <div class="cbs-badge-icon">🏈</div>
+          <div>
+            <strong>Why CBS Locked Spreads Give You a Massive Edge:</strong>
+            <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem;">
+              CBS locks the point spreads at the beginning of each week. Because those spreads never change, you gain <strong>free Closing Line Value (CLV)</strong> whenever the real sports betting market moves during the week. Our model compares the locked CBS lines to sharp market lines and model power ratings to find high-value discrepancies.
+            </p>
+          </div>
+        </div>
+
+        <div class="cbs-tool-tabs">
+          <h4 style="font-size: 0.85rem; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.05em; margin-bottom: 0.5rem;">
+            Option 1: Quick Paste CBS Contest Lines
+          </h4>
+          <p class="export-instructions">Copy the game lines directly from your CBS Sports Pick'em page and paste them below:</p>
+          <textarea id="cbsPasteArea" class="export-textbox" style="height: 120px;" placeholder="e.g.&#10;Ravens (+3.0) @ Chiefs (-3.0)&#10;Packers (+2.5) @ Eagles (-2.5)&#10;Steelers (+3.5) @ Falcons (-3.5)"></textarea>
+          <div style="display: flex; gap: 0.5rem; justify-content: flex-end; margin-top: 0.5rem;">
+            <button id="applyCbsPasteBtn" class="btn btn-primary btn-sm">Sync Locked Lines</button>
+          </div>
+        </div>
+
+        <div style="border-top: 1px solid var(--border-color); padding-top: 1rem;">
+          <h4 style="font-size: 0.85rem; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.05em; margin-bottom: 0.5rem;">
+            Option 2: 1-Click CBS Browser Bookmarklet
+          </h4>
+          <p class="export-instructions">
+            Drag this bookmarklet button to your browser's bookmarks bar. When viewing your CBS Sports Pool while logged in, click it to automatically pull locked spreads or apply your ranked picks directly onto the CBS page:
+          </p>
+          <div style="margin-top: 0.75rem; display: flex; align-items: center; gap: 1rem; background-color: var(--bg-card); padding: 0.85rem; border-radius: var(--radius-md); border: 1px dashed var(--border-color);">
+            <a id="cbsBookmarkletLink" href="#" class="btn btn-primary" onclick="return false;" title="Drag me to your bookmarks bar">
+              🏈 Sync Gridiron ➔ CBS Pool
+            </a>
+            <span style="font-size: 0.75rem; color: var(--text-muted);">
+              ⬅ Drag this button to your Chrome/Edge bookmarks bar!
+            </span>
+          </div>
+        </div>
+
+        <div style="border-top: 1px solid var(--border-color); padding-top: 1rem;">
+          <h4 style="font-size: 0.85rem; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.05em; margin-bottom: 0.5rem;">
+            Export Format For CBS Sports Pick'em
+          </h4>
+          <p class="export-instructions">Quick list formatted to match the order of CBS Sports pick sheets:</p>
+          <button id="copyCbsFormattedPicks" class="btn btn-secondary btn-sm">Copy CBS Pick Sheet Order</button>
         </div>
       </div>
     </div>

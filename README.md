@@ -11,6 +11,13 @@ A modern, responsive football spread confidence ranking dashboard and algorithmi
   - Automatic collision resolution (smooth rank swapping).
   - Pick against the spread (ATS) for Favorites or Underdogs.
 
+- **🔒 CBS Sports Locked Spreads Mode & CLV Strategy**:
+  - Built specifically for pools where spreads are locked at the start of the week (like CBS Sports Football Pick'em).
+  - **Closing Line Value (CLV)** Tracker: Highlights games where live market lines or model projections have drifted away from the early locked CBS line, handing you mathematically proven free points over your pool opponents.
+  - **Quick Paste CBS Line Sheet**: Paste lines copied from CBS to lock the sheet in seconds.
+  - **1-Click Browser Bookmarklet**: Sync directly from your logged-in CBS Sports Pick'em tab.
+  - **CBS Pick Order Export**: Formatted sequentially to make entering picks on CBS take under 30 seconds.
+
 - **Algorithmic Suggestion Engine**:
   - Calculates line value edge comparing market spreads with projected power ratings.
   - **Key Number Detection**: Analyzes critical margin landings (such as 3 and 7, plus half-point hooks like 2.5 and 3.5).

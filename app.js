@@ -342,12 +342,24 @@ function calculateGameEdge(game) {
     badgeLabel = 'Value Dog';
   }
 
+  // Calculate CBS Closing Line Value (CLV) Edge
+  const cbsLocked = game.cbsLockedSpread !== undefined ? game.cbsLockedSpread : homeSpread;
+  const clvDiff = Math.abs(cbsLocked - modelProj);
+  const clvEdge = Math.round(clvDiff * 10) / 10;
+
   return {
     recommendedTeam,
     recommendedAbbr,
     recommendedTeamName,
     recommendedSpread,
     spreadEdge: totalConfidenceEdge,
+    clvEdge,
+    cbsLocked,
+    badgeType,
+    badgeLabel,
+    explanation: `${recommendedAbbr} ${recommendedSpread} holds +${totalConfidenceEdge} pt model edge.`
+  };
+}
     badgeType,
     badgeLabel,
     explanation: `${recommendedAbbr} ${recommendedSpread} holds +${totalConfidenceEdge} pt model edge.`
@@ -407,6 +419,14 @@ const closeExportModal = document.getElementById('closeExportModal');
 const exportTextarea = document.getElementById('exportTextarea');
 const copyExportBtn = document.getElementById('copyExportBtn');
 const downloadJsonBtn = document.getElementById('downloadJsonBtn');
+
+const cbsModal = document.getElementById('cbsModal');
+const cbsModalBtn = document.getElementById('cbsModalBtn');
+const closeCbsModal = document.getElementById('closeCbsModal');
+const cbsPasteArea = document.getElementById('cbsPasteArea');
+const applyCbsPasteBtn = document.getElementById('applyCbsPasteBtn');
+const cbsBookmarkletLink = document.getElementById('cbsBookmarkletLink');
+const copyCbsFormattedPicks = document.getElementById('copyCbsFormattedPicks');
 
 const simModal = document.getElementById('simModal');
 const closeSimModal = document.getElementById('closeSimModal');
@@ -493,6 +513,8 @@ function renderGames() {
       return pick && pick.teamPicked;
     } else if (state.activeTab === 'suggestions') {
       return analysis.spreadEdge >= 2.0;
+    } else if (state.activeTab === 'cbs') {
+      return analysis.clvEdge >= 1.0;
     } else if (state.activeTab === 'underdogs') {
       return (analysis.recommendedTeam === 'AWAY' && g.homeSpread < 0) ||
              (analysis.recommendedTeam === 'HOME' && g.homeSpread > 0);
@@ -500,12 +522,18 @@ function renderGames() {
     return true;
   });
 
-  // Sort if on ranked tab
+  // Sort if on ranked tab or CBS CLV tab
   if (state.activeTab === 'ranked') {
     filtered.sort((a, b) => {
       const rankA = picks[a.id]?.rank || 0;
       const rankB = picks[b.id]?.rank || 0;
       return rankB - rankA; // Highest confidence first
+    });
+  } else if (state.activeTab === 'cbs') {
+    filtered.sort((a, b) => {
+      const edgeA = calculateGameEdge(a).clvEdge;
+      const edgeB = calculateGameEdge(b).clvEdge;
+      return edgeB - edgeA; // Highest CLV first
     });
   }
 
@@ -548,9 +576,13 @@ function renderGames() {
 
     card.innerHTML = `
       <div class="card-top-meta">
-        <span class="game-time-tag">
-          <span>🕒</span> ${game.time || 'TBD'}
-        </span>
+        <div style="display: flex; align-items: center; gap: 0.4rem; flex-wrap: wrap;">
+          <span class="game-time-tag">
+            <span>🕒</span> ${game.time || 'TBD'}
+          </span>
+          <span class="cbs-locked-indicator" title="Spread locked for CBS Pick'em Pool">🔒 CBS</span>
+          ${analysis.clvEdge >= 1.0 ? `<span class="cbs-clv-pill" title="Closing Line Value advantage over locked pool spread">+${analysis.clvEdge} CLV</span>` : ''}
+        </div>
         <div class="rank-selector-wrapper">
           <label class="rank-label">Confidence</label>
           <select class="rank-badge-select" data-game-id="${game.id}">
@@ -1020,12 +1052,73 @@ function initEventListeners() {
   cancelGameBtn.addEventListener('click', () => gameModal.classList.add('hidden'));
   closeExportModal.addEventListener('click', () => exportModal.classList.add('hidden'));
   closeSimModal.addEventListener('click', () => simModal.classList.add('hidden'));
+  closeCbsModal.addEventListener('click', () => cbsModal.classList.add('hidden'));
 
   // Close when clicking backdrop
-  [analysisModal, gameModal, exportModal, simModal].forEach(modal => {
+  [analysisModal, gameModal, exportModal, simModal, cbsModal].forEach(modal => {
     modal.addEventListener('click', (e) => {
       if (e.target === modal) modal.classList.add('hidden');
     });
+  });
+
+  // CBS Modal & Bookmarklet Setup
+  cbsModalBtn.addEventListener('click', () => cbsModal.classList.remove('hidden'));
+  const bookmarkletCode = `javascript:(function(){
+    var rows=document.querySelectorAll('.picks-row,.game-row,tr[data-game-id]');
+    if(!rows.length){alert('GridironSpread: Navigate to your CBS Sports Football Pick\\'em page, then click this bookmarklet to extract locked lines!');return;}
+    var res=[];rows.forEach(function(r){var t=r.innerText.replace(/\\s+/g,' ');if(t.length>5)res.push(t);});
+    prompt('Copy these lines and paste into GridironSpread CBS Sync:',res.join('\\n'));
+  })();`;
+  if (cbsBookmarkletLink) cbsBookmarkletLink.setAttribute('href', bookmarkletCode);
+
+  applyCbsPasteBtn.addEventListener('click', () => {
+    const raw = cbsPasteArea.value;
+    if (!raw.trim()) {
+      showToast('Please paste CBS game lines first.');
+      return;
+    }
+    const games = getCurrentGames();
+    let updatedCount = 0;
+    const lines = raw.split('\n');
+    lines.forEach(line => {
+      games.forEach(g => {
+        const homeMatch = line.toLowerCase().includes(g.homeTeam.toLowerCase()) || line.includes(g.homeAbbr);
+        const awayMatch = line.toLowerCase().includes(g.awayTeam.toLowerCase()) || line.includes(g.awayAbbr);
+        if (homeMatch && awayMatch) {
+          const numMatch = line.match(/([+-]?\d+\.?\d*)/g);
+          if (numMatch) {
+            const spreadCand = numMatch.map(Number).find(n => Math.abs(n) <= 24 && Math.abs(n) >= 0.5);
+            if (spreadCand !== undefined) {
+              g.homeSpread = spreadCand;
+              g.cbsLockedSpread = spreadCand;
+              updatedCount++;
+            }
+          }
+        }
+      });
+    });
+    saveState();
+    renderGames();
+    cbsModal.classList.add('hidden');
+    showToast(`Synced ${updatedCount} locked spreads from CBS!`);
+  });
+
+  copyCbsFormattedPicks.addEventListener('click', () => {
+    const games = getCurrentGames();
+    const picks = getCurrentPicks();
+    let out = `CBS SPORTS PICK'EM SHEET - ${state.currentWeek.toUpperCase()}\n`;
+    games.forEach((g, i) => {
+      const p = picks[g.id];
+      const awaySpread = -g.homeSpread;
+      const isAway = p?.teamPicked === 'AWAY';
+      const isHome = p?.teamPicked === 'HOME';
+      const pickTeam = isAway ? `${g.awayTeam} (${awaySpread > 0 ? '+' : ''}${awaySpread})` :
+                       isHome ? `${g.homeTeam} (${g.homeSpread > 0 ? '+' : ''}${g.homeSpread})` : 'NO PICK';
+      const rank = p?.rank ? `[${p.rank} pts]` : '[No Rank]';
+      out += `${i + 1}. ${g.awayAbbr} @ ${g.homeAbbr} ➔ ${pickTeam} ${rank}\n`;
+    });
+    navigator.clipboard.writeText(out);
+    showToast('Copied CBS sheet order to clipboard!');
   });
 
   // Export
