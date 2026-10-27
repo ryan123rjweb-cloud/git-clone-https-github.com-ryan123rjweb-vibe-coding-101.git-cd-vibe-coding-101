@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GridironSpread | Football Spread Ranker & AI Suggestions</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-layout">
+    <!-- Top Navigation Header -->
+    <header class="navbar">
+      <div class="nav-brand">
+        <div class="logo-badge">
+          <span class="logo-icon">🏈</span>
+        </div>
+        <div>
+          <h1 class="brand-title">Gridiron<span class="brand-accent">Spread</span></h1>
+          <p class="brand-subtitle">Weekly Spread Confidence Ranker & Edge Analytics</p>
+        </div>
+      </div>
+
+      <div class="nav-controls">
+        <div class="week-picker-wrapper">
+          <label for="weekSelect" class="control-label">Week</label>
+          <select id="weekSelect" class="form-select">
+            <option value="week-1">Week 1 (Opening Week)</option>
+            <option value="week-2">Week 2</option>
+            <option value="week-3">Week 3</option>
+            <option value="week-4">Week 4</option>
+            <option value="custom">Custom Matchups</option>
+          </select>
+        </div>
+
+        <div class="nav-actions">
+          <button id="autoSuggestBtn" class="btn btn-primary" title="Sort all games by algorithmic model edge">
+            <span class="btn-icon">⚡</span> Auto-Rank by Suggestions
+          </button>
+          <button id="addGameBtn" class="btn btn-secondary">
+            <span class="btn-icon">➕</span> Add Game
+          </button>
+          <button id="exportBtn" class="btn btn-secondary">
+            <span class="btn-icon">📋</span> Export Picks
+          </button>
+          <button id="simModalBtn" class="btn btn-secondary">
+            <span class="btn-icon">🏆</span> Simulate / Grade
+          </button>
+          <button id="resetBtn" class="btn btn-ghost" title="Reset all picks for current week">
+            <span class="btn-icon">🔄</span> Reset
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Metrics & Pool Overview Bar -->
+    <section class="overview-bar">
+      <div class="metric-card">
+        <span class="metric-label">Picks Completed</span>
+        <div class="metric-value-row">
+          <span id="metricPicksCompleted" class="metric-value">0 / 16</span>
+          <span id="metricPicksPct" class="metric-pill">0%</span>
+        </div>
+        <div class="progress-bar-bg">
+          <div id="metricProgressBar" class="progress-bar-fill" style="width: 0%"></div>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <span class="metric-label">Pool Confidence Points</span>
+        <div class="metric-value-row">
+          <span id="metricTotalPoints" class="metric-value">0 pts</span>
+          <span class="metric-sub">Max: 136 pts</span>
+        </div>
+        <span class="metric-caption">Points allocated based on 1–16 confidence rank</span>
+      </div>
+
+      <div class="metric-card">
+        <span class="metric-label">Top Model Lock</span>
+        <div class="metric-value-row">
+          <span id="metricTopLock" class="metric-value text-accent">—</span>
+          <span id="metricTopLockEdge" class="metric-pill pill-success">+0.0 Edge</span>
+        </div>
+        <span id="metricTopLockDesc" class="metric-caption">Run suggestions to highlight highest value spread</span>
+      </div>
+
+      <div class="metric-card">
+        <span class="metric-label">Avg Line Value Edge</span>
+        <div class="metric-value-row">
+          <span id="metricAvgEdge" class="metric-value">+2.8 pts</span>
+          <span class="metric-pill pill-cyan">Key Numbers</span>
+        </div>
+        <span class="metric-caption">Comparing market spreads to implied power lines</span>
+      </div>
+    </section>
+
+    <!-- Main Content Area -->
+    <main class="main-container">
+      <!-- Toolbar & Filters -->
+      <div class="view-toolbar">
+        <div class="tab-group" role="tablist">
+          <button class="tab active" data-tab="all">All Matchups</button>
+          <button class="tab" data-tab="ranked">Confidence Board (Sorted)</button>
+          <button class="tab" data-tab="suggestions">Model Edge Picks</button>
+          <button class="tab" data-tab="underdogs">Value Underdogs</button>
+        </div>
+
+        <div class="filter-controls">
+          <input type="text" id="searchFilter" placeholder="Filter team or matchup..." class="search-input">
+          <button id="clearPicksBtn" class="btn btn-sm btn-outline">Clear Picks</button>
+        </div>
+      </div>
+
+      <!-- Games Grid / Board -->
+      <div id="gamesContainer" class="games-grid">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+    </main>
+  </div>
+
+  <!-- Game Details & Analysis Modal -->
+  <div id="analysisModal" class="modal-overlay hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div>
+          <h3 id="modalMatchupTitle" class="modal-title">Matchup Analysis</h3>
+          <p id="modalMatchupMeta" class="modal-subtitle">Spread Breakdown & Historical Angles</p>
+        </div>
+        <button id="closeAnalysisModal" class="modal-close">&times;</button>
+      </div>
+      <div class="modal-body" id="analysisModalBody">
+        <!-- Injected dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Custom Game Modal -->
+  <div id="gameModal" class="modal-overlay hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="gameModalTitle" class="modal-title">Add / Edit Matchup</h3>
+        <button id="closeGameModal" class="modal-close">&times;</button>
+      </div>
+      <form id="gameForm" class="modal-body form-grid">
+        <input type="hidden" id="editGameId">
+        <div class="form-group">
+          <label>Away Team</label>
+          <input type="text" id="inputAwayTeam" required placeholder="e.g. Baltimore Ravens" class="form-input">
+        </div>
+        <div class="form-group">
+          <label>Away Abbr (e.g. BAL)</label>
+          <input type="text" id="inputAwayAbbr" maxlength="4" required placeholder="BAL" class="form-input">
+        </div>
+        <div class="form-group">
+          <label>Home Team</label>
+          <input type="text" id="inputHomeTeam" required placeholder="e.g. Kansas City Chiefs" class="form-input">
+        </div>
+        <div class="form-group">
+          <label>Home Abbr (e.g. KC)</label>
+          <input type="text" id="inputHomeAbbr" maxlength="4" required placeholder="KC" class="form-input">
+        </div>
+        <div class="form-group">
+          <label>Spread (relative to Home team, e.g. -3.0 means Home favored by 3)</label>
+          <input type="number" step="0.5" id="inputHomeSpread" required placeholder="-3.0" class="form-input">
+        </div>
+        <div class="form-group">
+          <label>Over / Under (Total)</label>
+          <input type="number" step="0.5" id="inputTotal" required placeholder="47.5" class="form-input">
+        </div>
+        <div class="form-group full-width">
+          <label>Game Time / Network</label>
+          <input type="text" id="inputTime" placeholder="Sun 1:00 PM ET | CBS" class="form-input">
+        </div>
+        <div class="form-actions full-width">
+          <button type="button" id="cancelGameBtn" class="btn btn-secondary">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Matchup</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Export Modal -->
+  <div id="exportModal" class="modal-overlay hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">📋 Export Your Spread Rankings</h3>
+        <button id="closeExportModal" class="modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p class="export-instructions">Copy your confidence rankings to paste into office pools, discord, or text messages:</p>
+        <textarea id="exportTextarea" class="export-textbox" readonly></textarea>
+        <div class="export-actions">
+          <button id="copyExportBtn" class="btn btn-primary">Copy to Clipboard</button>
+          <button id="downloadJsonBtn" class="btn btn-secondary">Download JSON</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Simulation / Score Grader Modal -->
+  <div id="simModal" class="modal-overlay hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">🏆 Grade Picks & Score Simulator</h3>
+        <button id="closeSimModal" class="modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p class="export-instructions">Simulate game outcomes with typical margins or test against final scores to see how many points your confidence ranking scores!</p>
+        <div class="sim-controls">
+          <button id="runSimBtn" class="btn btn-primary">🎲 Simulate Realistic Scores</button>
+          <button id="clearSimBtn" class="btn btn-secondary">Clear Scores</button>
+        </div>
+        <div id="simResultsBanner" class="sim-summary hidden">
+          <!-- Filled dynamically -->
+        </div>
+        <div id="simScoreInputs" class="sim-scores-list">
+          <!-- Rendered dynamically -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
