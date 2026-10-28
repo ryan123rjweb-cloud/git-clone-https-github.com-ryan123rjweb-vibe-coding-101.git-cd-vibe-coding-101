@@ -40,6 +40,190 @@ const TEAM_DATA = {
 
 // Rich curated dataset for multiple NFL weeks with spreads and algorithmic projections
 const DEFAULT_WEEKS_DATA = {
+  'cbs-tbp': [
+    {
+      id: 'cbs-1',
+      awayTeam: 'Carolina Panthers', awayAbbr: 'CAR', awayRecord: '3-3', awayPickPct: '26%',
+      homeTeam: 'Green Bay Packers', homeAbbr: 'GB', homeRecord: '4-3', homePickPct: '74%',
+      homeSpread: -3.5, cbsLockedSpread: -3.5, total: 44.5, time: 'Thu 8:15 PM ET • AMZN',
+      cbsPts: 14,
+      modelProjLine: -1.5,
+      keyFactors: [
+        'Public is heavily skewed on Green Bay (74%), creating high contrarian leverage on Carolina.',
+        'Spread is at -3.5: getting +3.5 on Panthers secures the crucial 3-point hook.',
+        'Short week Thursday night road underdogs of 3+ cover at a 57.8% historical clip.'
+      ]
+    },
+    {
+      id: 'cbs-2',
+      awayTeam: 'Baltimore Ravens', awayAbbr: 'BAL', awayRecord: '4-3', awayPickPct: '26%',
+      homeTeam: 'Buffalo Bills', homeAbbr: 'BUF', homeRecord: '5-1', homePickPct: '74%',
+      homeSpread: -4.5, cbsLockedSpread: -4.5, total: 50.5, time: 'Sun 1:00 PM ET',
+      cbsPts: 13,
+      modelProjLine: -2.0,
+      keyFactors: [
+        'Massive 74% public bias on Buffalo; Baltimore +4.5 is a top-tier leverage opportunity.',
+        'Lamar Jackson is 18-5 ATS (78%) as an underdog in his career.',
+        'Model projects a tight 2-point game; +4.5 gives protection across key numbers 3 and 4.'
+      ]
+    },
+    {
+      id: 'cbs-3',
+      awayTeam: 'Tennessee Titans', awayAbbr: 'TEN', awayRecord: '1-6', awayPickPct: '43%',
+      homeTeam: 'Cincinnati Bengals', homeAbbr: 'CIN', homeRecord: '4-2', homePickPct: '57%',
+      homeSpread: -10.5, cbsLockedSpread: -10.5, total: 46.5, time: 'Sun 1:00 PM ET',
+      cbsPts: 12,
+      modelProjLine: -7.5,
+      keyFactors: [
+        'Double-digit NFL spreads (+10.5) cover at 54% when the dog has offensive line adjustments.',
+        'Bengals defense allows 4.8 YPC on the ground, matching Titans rushing strengths.',
+        'Model projects a 27-20 Cincinnati victory, easily inside the 10.5 cushion.'
+      ]
+    },
+    {
+      id: 'cbs-4',
+      awayTeam: 'Arizona Cardinals', awayAbbr: 'ARI', awayRecord: '2-5', awayPickPct: '43%',
+      homeTeam: 'Dallas Cowboys', homeAbbr: 'DAL', homeRecord: '3-4', homePickPct: '57%',
+      homeSpread: -6.5, cbsLockedSpread: -6.5, total: 47.0, time: 'Sun 1:00 PM ET • FOX',
+      cbsPts: 11,
+      modelProjLine: -4.0,
+      keyFactors: [
+        'Cardinals dynamic run-pass offense exploits Cowboys defense ranked 29th against rushing.',
+        'Spread is stationed at -6.5, below the key touchdown number 7.',
+        'Kyler Murray 14-8 ATS as a road underdog of 4 or more.'
+      ]
+    },
+    {
+      id: 'cbs-5',
+      awayTeam: 'Minnesota Vikings', awayAbbr: 'MIN', awayRecord: '6-0', awayPickPct: '55%',
+      homeTeam: 'Detroit Lions', homeAbbr: 'DET', homeRecord: '4-2', homePickPct: '45%',
+      homeSpread: -3.5, cbsLockedSpread: -3.5, total: 51.0, time: 'Sun 1:00 PM ET • FOX',
+      cbsPts: 10,
+      modelProjLine: +1.0,
+      keyFactors: [
+        'Undefeated Vikings (6-0) receiving +3.5 points is the premier value pick on the board.',
+        'Minnesota leads NFL in defensive EPA/play and turnover differential (+9).',
+        'Getting the +3.5 hook past 3 in an intense division rivalry matchup.'
+      ]
+    },
+    {
+      id: 'cbs-6',
+      awayTeam: 'Indianapolis Colts', awayAbbr: 'IND', awayRecord: '2-5', awayPickPct: '31%',
+      homeTeam: 'Jacksonville Jaguars', homeAbbr: 'JAX', homeRecord: '4-2', homePickPct: '69%',
+      homeSpread: -7.5, cbsLockedSpread: -7.5, total: 45.0, time: 'Sun 1:00 PM ET',
+      cbsPts: 9,
+      modelProjLine: -4.5,
+      keyFactors: [
+        'Divisional dog +7.5 crosses key numbers 3, 6, and 7.',
+        'Colts possess a +24 rush explosive rate advantage.',
+        '69% of public on JAX creates high contrarian value on IND.'
+      ]
+    },
+    {
+      id: 'cbs-7',
+      awayTeam: 'Las Vegas Raiders', awayAbbr: 'LV', awayRecord: '3-4', awayPickPct: '70%',
+      homeTeam: 'New York Jets', homeAbbr: 'NYJ', homeRecord: '2-5', homePickPct: '30%',
+      homeSpread: -0.5, cbsLockedSpread: -0.5, total: 39.5, time: 'Sun 1:00 PM ET • FOX',
+      cbsPts: 8,
+      modelProjLine: -2.5,
+      keyFactors: [
+        'Heavy public backing on Raiders (70%) on road creating sharp contrarian edge on Jets.',
+        'Jets defense at MetLife Stadium ranks top-5 in pass pressure rate.',
+        'Model rates Jets -2.5, making -0.5 a high-value home pick.'
+      ]
+    },
+    {
+      id: 'cbs-8',
+      awayTeam: 'Cleveland Browns', awayAbbr: 'CLE', awayRecord: '5-2', awayPickPct: '51%',
+      homeTeam: 'Pittsburgh Steelers', homeAbbr: 'PIT', homeRecord: '5-2', homePickPct: '49%',
+      homeSpread: -3.5, cbsLockedSpread: -3.5, total: 38.5, time: 'Sun 1:00 PM ET',
+      cbsPts: 7,
+      modelProjLine: -1.5,
+      keyFactors: [
+        'Both teams tied at 5-2 in AFC North battle.',
+        'Low projected total (38.5) makes +3.5 points worth nearly 40% more than in high-scoring games.',
+        'Browns defensive line pressure gives Cleveland strong cover margin.'
+      ]
+    },
+    {
+      id: 'cbs-9',
+      awayTeam: 'Atlanta Falcons', awayAbbr: 'ATL', awayRecord: '3-4', awayPickPct: '51%',
+      homeTeam: 'Tampa Bay Buccaneers', homeAbbr: 'TB', homeRecord: '2-5', homePickPct: '49%',
+      homeSpread: -1.5, cbsLockedSpread: -1.5, total: 43.5, time: 'Sun 1:00 PM ET • FOX',
+      cbsPts: 6,
+      modelProjLine: -3.0,
+      keyFactors: [
+        'Buccaneers home division spot laying under a field goal (-1.5).',
+        'Baker Mayfield red zone efficiency against Falcons 24th-ranked secondary.',
+        'Model predicts a 24-20 Tampa Bay victory.'
+      ]
+    },
+    {
+      id: 'cbs-10',
+      awayTeam: 'Los Angeles Chargers', awayAbbr: 'LAC', awayRecord: '0-6', awayPickPct: '21%',
+      homeTeam: 'Los Angeles Rams', homeAbbr: 'LAR', homeRecord: '3-4', homePickPct: '79%',
+      homeSpread: -6.5, cbsLockedSpread: -6.5, total: 44.0, time: 'Sun 4:05 PM ET • FOX',
+      cbsPts: 5,
+      modelProjLine: -4.0,
+      keyFactors: [
+        'Shared SoFi Stadium matchup neutralizes Rams home field advantage.',
+        'Public 79% lopsided on Rams; desperate 0-6 Chargers playing with maximum urgency.',
+        'Model projects Rams by 4, offering +6.5 cover cushion.'
+      ]
+    },
+    {
+      id: 'cbs-11',
+      awayTeam: 'Kansas City Chiefs', awayAbbr: 'KC', awayRecord: '5-1', awayPickPct: '49%',
+      homeTeam: 'Denver Broncos', homeAbbr: 'DEN', homeRecord: '5-2', homePickPct: '51%',
+      homeSpread: +1.5, cbsLockedSpread: +1.5, total: 46.5, time: 'Sun 4:25 PM ET',
+      cbsPts: 4,
+      modelProjLine: -4.0,
+      keyFactors: [
+        'Chiefs (5-1) laying just -1.5 against Denver is the clearest market misprice of the week.',
+        'Patrick Mahomes is 14-1 straight up against the Denver Broncos.',
+        'Model projects Chiefs by 4 points; -1.5 provides top-tier edge.'
+      ]
+    },
+    {
+      id: 'cbs-12',
+      awayTeam: 'New England Patriots', awayAbbr: 'NE', awayRecord: '4-3', awayPickPct: '67%',
+      homeTeam: 'Miami Dolphins', homeAbbr: 'MIA', homeRecord: '1-5', homePickPct: '33%',
+      homeSpread: +7.5, cbsLockedSpread: +7.5, total: 42.5, time: 'Sun 4:25 PM ET',
+      cbsPts: 3,
+      modelProjLine: -4.0,
+      keyFactors: [
+        'Patriots laying -7.5 on the road against division rival in Miami heat is over-inflated.',
+        'Miami getting +7.5 crosses key numbers 3, 6, and 7.',
+        'Contrarian value with 67% on New England.'
+      ]
+    },
+    {
+      id: 'cbs-13',
+      awayTeam: 'Philadelphia Eagles', awayAbbr: 'PHI', awayRecord: '2-5', awayPickPct: '35%',
+      homeTeam: 'Washington Commanders', homeAbbr: 'WAS', homeRecord: '1-4-1', homePickPct: '65%',
+      homeSpread: -3.5, cbsLockedSpread: -3.5, total: 45.5, time: 'Sun 8:20 PM ET • NBC',
+      cbsPts: 2,
+      modelProjLine: -1.0,
+      keyFactors: [
+        'Sunday Night Primetime division showdown.',
+        'Eagles getting +3.5 provides the vital half-point hook beyond 3.',
+        'Public heavily backing Washington (65%) leaves strong value on Philly.'
+      ]
+    },
+    {
+      id: 'cbs-14',
+      awayTeam: 'Chicago Bears', awayAbbr: 'CHI', awayRecord: '5-2', awayPickPct: '50%',
+      homeTeam: 'Seattle Seahawks', homeAbbr: 'SEA', homeRecord: '4-3', homePickPct: '50%',
+      homeSpread: -3.5, cbsLockedSpread: -3.5, total: 43.0, time: 'Mon 8:15 PM ET • ESPN',
+      cbsPts: 1,
+      modelProjLine: -1.5,
+      keyFactors: [
+        'Monday Night Football finale with tiebreaker total score projection ~43 points.',
+        'Bears (5-2) getting +3.5 against Seahawks (4-3).',
+        'Model predicts a 23-21 game, giving Chicago +3.5 strong cover advantage.'
+      ]
+    }
+  ],
   'week-1': [
     {
       id: 'g1',
@@ -278,12 +462,15 @@ const DEFAULT_WEEKS_DATA = {
   'custom': []
 };
 
+const savedWeeks = JSON.parse(localStorage.getItem('gridiron_weeks')) || {};
+const initialWeeks = { ...DEFAULT_WEEKS_DATA, ...savedWeeks, 'cbs-tbp': DEFAULT_WEEKS_DATA['cbs-tbp'] };
+
 // Application State
 const state = {
-  currentWeek: 'week-1',
+  currentWeek: 'cbs-tbp',
   activeTab: 'all', // all, ranked, suggestions, underdogs
   searchQuery: '',
-  weeks: JSON.parse(localStorage.getItem('gridiron_weeks')) || DEFAULT_WEEKS_DATA,
+  weeks: initialWeeks,
   // User picks per week: { [weekKey]: { [gameId]: { teamPicked: 'AWAY'|'HOME', rank: number } } }
   userPicks: JSON.parse(localStorage.getItem('gridiron_picks')) || {},
   simScores: {}
@@ -457,7 +644,8 @@ function updateMetrics() {
   Object.values(picks).forEach(p => {
     if (p.rank && p.teamPicked) pointsAllocated += parseInt(p.rank, 10);
   });
-  metricTotalPoints.textContent = `${pointsAllocated} pts`;
+  const maxPossible = Math.round((totalGames * (totalGames + 1)) / 2);
+  metricTotalPoints.innerHTML = `${pointsAllocated} pts <span class="metric-sub">/ ${maxPossible} pts</span>`;
 
   // Find top model lock
   let topGame = null;
@@ -594,7 +782,10 @@ function renderGames() {
               ${game.awayAbbr}
             </div>
             <div class="team-details">
-              <span class="team-name">${game.awayTeam}</span>
+              <span class="team-name">
+                ${game.awayTeam}
+                ${game.awayPickPct ? `<span class="cbs-pct-badge" title="Public Pool Pick %">${game.awayPickPct}</span>` : ''}
+              </span>
               <span class="team-record">${game.awayRecord || '0-0'} • Away</span>
             </div>
           </div>
@@ -611,7 +802,10 @@ function renderGames() {
               ${game.homeAbbr}
             </div>
             <div class="team-details">
-              <span class="team-name">${game.homeTeam}</span>
+              <span class="team-name">
+                ${game.homeTeam}
+                ${game.homePickPct ? `<span class="cbs-pct-badge" title="Public Pool Pick %">${game.homePickPct}</span>` : ''}
+              </span>
               <span class="team-record">${game.homeRecord || '0-0'} • Home</span>
             </div>
           </div>
