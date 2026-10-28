@@ -45,77 +45,77 @@ const DEFAULT_WEEKS_DATA = {
       id: 'cbs-1',
       awayTeam: 'Carolina Panthers', awayAbbr: 'CAR', awayRecord: '3-3', awayPickPct: '26%',
       homeTeam: 'Green Bay Packers', homeAbbr: 'GB', homeRecord: '4-3', homePickPct: '74%',
-      homeSpread: -3.5, cbsLockedSpread: -3.5, total: 44.5, time: 'Thu 8:15 PM ET • AMZN',
+      homeSpread: -3.5, cbsLockedSpread: -3.5, currentMarketSpread: -3.0, total: 44.5, time: 'Thu 8:15 PM ET • AMZN',
       cbsPts: 14,
       modelProjLine: -1.5,
       keyFactors: [
         'Public is heavily skewed on Green Bay (74%), creating high contrarian leverage on Carolina.',
         'Spread is at -3.5: getting +3.5 on Panthers secures the crucial 3-point hook.',
-        'Short week Thursday night road underdogs of 3+ cover at a 57.8% historical clip.'
+        'Vegas line shifted from -3.5 towards -3.0: money moving toward Carolina.'
       ]
     },
     {
       id: 'cbs-2',
       awayTeam: 'Baltimore Ravens', awayAbbr: 'BAL', awayRecord: '4-3', awayPickPct: '26%',
       homeTeam: 'Buffalo Bills', homeAbbr: 'BUF', homeRecord: '5-1', homePickPct: '74%',
-      homeSpread: -4.5, cbsLockedSpread: -4.5, total: 50.5, time: 'Sun 1:00 PM ET',
+      homeSpread: -4.5, cbsLockedSpread: -4.5, currentMarketSpread: -3.5, total: 50.5, time: 'Sun 1:00 PM ET',
       cbsPts: 13,
       modelProjLine: -2.0,
       keyFactors: [
         'Massive 74% public bias on Buffalo; Baltimore +4.5 is a top-tier leverage opportunity.',
-        'Lamar Jackson is 18-5 ATS (78%) as an underdog in his career.',
-        'Model projects a tight 2-point game; +4.5 gives protection across key numbers 3 and 4.'
+        'Sharp money pushed Vegas line from -4.5 down to -3.5: 1.0 point of free CLV!',
+        'Lamar Jackson is 18-5 ATS (78%) as an underdog in his career.'
       ]
     },
     {
       id: 'cbs-3',
       awayTeam: 'Tennessee Titans', awayAbbr: 'TEN', awayRecord: '1-6', awayPickPct: '43%',
       homeTeam: 'Cincinnati Bengals', homeAbbr: 'CIN', homeRecord: '4-2', homePickPct: '57%',
-      homeSpread: -10.5, cbsLockedSpread: -10.5, total: 46.5, time: 'Sun 1:00 PM ET',
+      homeSpread: -10.5, cbsLockedSpread: -10.5, currentMarketSpread: -9.5, total: 46.5, time: 'Sun 1:00 PM ET',
       cbsPts: 12,
       modelProjLine: -7.5,
       keyFactors: [
         'Double-digit NFL spreads (+10.5) cover at 54% when the dog has offensive line adjustments.',
         'Bengals defense allows 4.8 YPC on the ground, matching Titans rushing strengths.',
-        'Model projects a 27-20 Cincinnati victory, easily inside the 10.5 cushion.'
+        'Vegas moved to -9.5: taking Titans +10.5 on CBS gives +1.0 free points.'
       ]
     },
     {
       id: 'cbs-4',
       awayTeam: 'Arizona Cardinals', awayAbbr: 'ARI', awayRecord: '2-5', awayPickPct: '43%',
       homeTeam: 'Dallas Cowboys', homeAbbr: 'DAL', homeRecord: '3-4', homePickPct: '57%',
-      homeSpread: -6.5, cbsLockedSpread: -6.5, total: 47.0, time: 'Sun 1:00 PM ET • FOX',
+      homeSpread: -6.5, cbsLockedSpread: -6.5, currentMarketSpread: -6.5, total: 47.0, time: 'Sun 1:00 PM ET • FOX',
       cbsPts: 11,
       modelProjLine: -4.0,
       keyFactors: [
         'Cardinals dynamic run-pass offense exploits Cowboys defense ranked 29th against rushing.',
         'Spread is stationed at -6.5, below the key touchdown number 7.',
-        'Kyler Murray 14-8 ATS as a road underdog of 4 or more.'
+        'Line holds firm at -6.5 across major sportsbooks.'
       ]
     },
     {
       id: 'cbs-5',
       awayTeam: 'Minnesota Vikings', awayAbbr: 'MIN', awayRecord: '6-0', awayPickPct: '55%',
       homeTeam: 'Detroit Lions', homeAbbr: 'DET', homeRecord: '4-2', homePickPct: '45%',
-      homeSpread: -3.5, cbsLockedSpread: -3.5, total: 51.0, time: 'Sun 1:00 PM ET • FOX',
+      homeSpread: -3.5, cbsLockedSpread: -3.5, currentMarketSpread: -2.5, total: 51.0, time: 'Sun 1:00 PM ET • FOX',
       cbsPts: 10,
       modelProjLine: +1.0,
       keyFactors: [
         'Undefeated Vikings (6-0) receiving +3.5 points is the premier value pick on the board.',
-        'Minnesota leads NFL in defensive EPA/play and turnover differential (+9).',
-        'Getting the +3.5 hook past 3 in an intense division rivalry matchup.'
+        'STEAM ALERT: Vegas moved line through 3 to Lions -2.5! Taking Vikings +3.5 on CBS gives huge free hook!',
+        'Minnesota leads NFL in defensive EPA/play and turnover differential (+9).'
       ]
     },
     {
       id: 'cbs-6',
       awayTeam: 'Indianapolis Colts', awayAbbr: 'IND', awayRecord: '2-5', awayPickPct: '31%',
       homeTeam: 'Jacksonville Jaguars', homeAbbr: 'JAX', homeRecord: '4-2', homePickPct: '69%',
-      homeSpread: -7.5, cbsLockedSpread: -7.5, total: 45.0, time: 'Sun 1:00 PM ET',
+      homeSpread: -7.5, cbsLockedSpread: -7.5, currentMarketSpread: -7.0, total: 45.0, time: 'Sun 1:00 PM ET',
       cbsPts: 9,
       modelProjLine: -4.5,
       keyFactors: [
         'Divisional dog +7.5 crosses key numbers 3, 6, and 7.',
-        'Colts possess a +24 rush explosive rate advantage.',
+        'Vegas moved down to -7.0: taking IND +7.5 on CBS catches the hook past 7.',
         '69% of public on JAX creates high contrarian value on IND.'
       ]
     },
@@ -123,77 +123,77 @@ const DEFAULT_WEEKS_DATA = {
       id: 'cbs-7',
       awayTeam: 'Las Vegas Raiders', awayAbbr: 'LV', awayRecord: '3-4', awayPickPct: '70%',
       homeTeam: 'New York Jets', homeAbbr: 'NYJ', homeRecord: '2-5', homePickPct: '30%',
-      homeSpread: -0.5, cbsLockedSpread: -0.5, total: 39.5, time: 'Sun 1:00 PM ET • FOX',
+      homeSpread: -0.5, cbsLockedSpread: -0.5, currentMarketSpread: -1.5, total: 39.5, time: 'Sun 1:00 PM ET • FOX',
       cbsPts: 8,
       modelProjLine: -2.5,
       keyFactors: [
         'Heavy public backing on Raiders (70%) on road creating sharp contrarian edge on Jets.',
-        'Jets defense at MetLife Stadium ranks top-5 in pass pressure rate.',
-        'Model rates Jets -2.5, making -0.5 a high-value home pick.'
+        'Vegas moved to NYJ -1.5: taking NYJ at -0.5 on CBS gives +1.0 free points.',
+        'Jets defense at MetLife Stadium ranks top-5 in pass pressure rate.'
       ]
     },
     {
       id: 'cbs-8',
       awayTeam: 'Cleveland Browns', awayAbbr: 'CLE', awayRecord: '5-2', awayPickPct: '51%',
       homeTeam: 'Pittsburgh Steelers', homeAbbr: 'PIT', homeRecord: '5-2', homePickPct: '49%',
-      homeSpread: -3.5, cbsLockedSpread: -3.5, total: 38.5, time: 'Sun 1:00 PM ET',
+      homeSpread: -3.5, cbsLockedSpread: -3.5, currentMarketSpread: -3.0, total: 38.5, time: 'Sun 1:00 PM ET',
       cbsPts: 7,
       modelProjLine: -1.5,
       keyFactors: [
         'Both teams tied at 5-2 in AFC North battle.',
         'Low projected total (38.5) makes +3.5 points worth nearly 40% more than in high-scoring games.',
-        'Browns defensive line pressure gives Cleveland strong cover margin.'
+        'Vegas moved from -3.5 to -3.0: Browns +3.5 on CBS gains half-point hook.'
       ]
     },
     {
       id: 'cbs-9',
       awayTeam: 'Atlanta Falcons', awayAbbr: 'ATL', awayRecord: '3-4', awayPickPct: '51%',
       homeTeam: 'Tampa Bay Buccaneers', homeAbbr: 'TB', homeRecord: '2-5', homePickPct: '49%',
-      homeSpread: -1.5, cbsLockedSpread: -1.5, total: 43.5, time: 'Sun 1:00 PM ET • FOX',
+      homeSpread: -1.5, cbsLockedSpread: -1.5, currentMarketSpread: -2.0, total: 43.5, time: 'Sun 1:00 PM ET • FOX',
       cbsPts: 6,
       modelProjLine: -3.0,
       keyFactors: [
         'Buccaneers home division spot laying under a field goal (-1.5).',
-        'Baker Mayfield red zone efficiency against Falcons 24th-ranked secondary.',
-        'Model predicts a 24-20 Tampa Bay victory.'
+        'Vegas moved to -2.0, confirming sharp confidence in Tampa Bay.',
+        'Baker Mayfield red zone efficiency against Falcons 24th-ranked secondary.'
       ]
     },
     {
       id: 'cbs-10',
       awayTeam: 'Los Angeles Chargers', awayAbbr: 'LAC', awayRecord: '0-6', awayPickPct: '21%',
       homeTeam: 'Los Angeles Rams', homeAbbr: 'LAR', homeRecord: '3-4', homePickPct: '79%',
-      homeSpread: -6.5, cbsLockedSpread: -6.5, total: 44.0, time: 'Sun 4:05 PM ET • FOX',
+      homeSpread: -6.5, cbsLockedSpread: -6.5, currentMarketSpread: -6.0, total: 44.0, time: 'Sun 4:05 PM ET • FOX',
       cbsPts: 5,
       modelProjLine: -4.0,
       keyFactors: [
         'Shared SoFi Stadium matchup neutralizes Rams home field advantage.',
         'Public 79% lopsided on Rams; desperate 0-6 Chargers playing with maximum urgency.',
-        'Model projects Rams by 4, offering +6.5 cover cushion.'
+        'Vegas softened to -6.0, indicating underdog support.'
       ]
     },
     {
       id: 'cbs-11',
       awayTeam: 'Kansas City Chiefs', awayAbbr: 'KC', awayRecord: '5-1', awayPickPct: '49%',
       homeTeam: 'Denver Broncos', homeAbbr: 'DEN', homeRecord: '5-2', homePickPct: '51%',
-      homeSpread: +1.5, cbsLockedSpread: +1.5, total: 46.5, time: 'Sun 4:25 PM ET',
+      homeSpread: +1.5, cbsLockedSpread: +1.5, currentMarketSpread: +3.0, total: 46.5, time: 'Sun 4:25 PM ET',
       cbsPts: 4,
       modelProjLine: -4.0,
       keyFactors: [
-        'Chiefs (5-1) laying just -1.5 against Denver is the clearest market misprice of the week.',
-        'Patrick Mahomes is 14-1 straight up against the Denver Broncos.',
-        'Model projects Chiefs by 4 points; -1.5 provides top-tier edge.'
+        'BIGGEST STEAM OF THE WEEK: Vegas moved line from KC -1.5 all the way to KC -3.0!',
+        'Taking Chiefs at -1.5 on CBS gives a massive +1.5 points of free Closing Line Value!',
+        'Patrick Mahomes is 14-1 straight up against the Denver Broncos.'
       ]
     },
     {
       id: 'cbs-12',
       awayTeam: 'New England Patriots', awayAbbr: 'NE', awayRecord: '4-3', awayPickPct: '67%',
       homeTeam: 'Miami Dolphins', homeAbbr: 'MIA', homeRecord: '1-5', homePickPct: '33%',
-      homeSpread: +7.5, cbsLockedSpread: +7.5, total: 42.5, time: 'Sun 4:25 PM ET',
+      homeSpread: +7.5, cbsLockedSpread: +7.5, currentMarketSpread: +6.5, total: 42.5, time: 'Sun 4:25 PM ET',
       cbsPts: 3,
       modelProjLine: -4.0,
       keyFactors: [
-        'Patriots laying -7.5 on the road against division rival in Miami heat is over-inflated.',
-        'Miami getting +7.5 crosses key numbers 3, 6, and 7.',
+        'Vegas dropped from 7.5 to 6.5! Taking Miami +7.5 on CBS gives +1.0 free hook past 7!',
+        'Patriots laying 7.5 on the road against division rival in Miami heat is over-inflated.',
         'Contrarian value with 67% on New England.'
       ]
     },
@@ -201,12 +201,12 @@ const DEFAULT_WEEKS_DATA = {
       id: 'cbs-13',
       awayTeam: 'Philadelphia Eagles', awayAbbr: 'PHI', awayRecord: '2-5', awayPickPct: '35%',
       homeTeam: 'Washington Commanders', homeAbbr: 'WAS', homeRecord: '1-4-1', homePickPct: '65%',
-      homeSpread: -3.5, cbsLockedSpread: -3.5, total: 45.5, time: 'Sun 8:20 PM ET • NBC',
+      homeSpread: -3.5, cbsLockedSpread: -3.5, currentMarketSpread: -2.5, total: 45.5, time: 'Sun 8:20 PM ET • NBC',
       cbsPts: 2,
       modelProjLine: -1.0,
       keyFactors: [
+        'Vegas moved through key number 3 down to -2.5! Eagles +3.5 on CBS retains the vital hook!',
         'Sunday Night Primetime division showdown.',
-        'Eagles getting +3.5 provides the vital half-point hook beyond 3.',
         'Public heavily backing Washington (65%) leaves strong value on Philly.'
       ]
     },
@@ -214,12 +214,12 @@ const DEFAULT_WEEKS_DATA = {
       id: 'cbs-14',
       awayTeam: 'Chicago Bears', awayAbbr: 'CHI', awayRecord: '5-2', awayPickPct: '50%',
       homeTeam: 'Seattle Seahawks', homeAbbr: 'SEA', homeRecord: '4-3', homePickPct: '50%',
-      homeSpread: -3.5, cbsLockedSpread: -3.5, total: 43.0, time: 'Mon 8:15 PM ET • ESPN',
+      homeSpread: -3.5, cbsLockedSpread: -3.5, currentMarketSpread: -3.0, total: 43.0, time: 'Mon 8:15 PM ET • ESPN',
       cbsPts: 1,
       modelProjLine: -1.5,
       keyFactors: [
+        'Vegas adjusted to -3.0, giving Chicago +3.5 on CBS a half-point advantage.',
         'Monday Night Football finale with tiebreaker total score projection ~43 points.',
-        'Bears (5-2) getting +3.5 against Seahawks (4-3).',
         'Model predicts a 23-21 game, giving Chicago +3.5 strong cover advantage.'
       ]
     }
@@ -548,6 +548,42 @@ function calculateGameEdge(game) {
   };
 }
 
+// Calculate Live Vegas Line Shift vs CBS Locked Spread
+function calculateLineShift(game) {
+  const cbs = game.cbsLockedSpread !== undefined ? parseFloat(game.cbsLockedSpread) : parseFloat(game.homeSpread);
+  const live = game.currentMarketSpread !== undefined ? parseFloat(game.currentMarketSpread) : cbs;
+  // If CBS is -1.5 (KC favored by 1.5) and Vegas is -3.0 (KC favored by 3.0),
+  // cbs - live = (-1.5) - (-3.0) = +1.5 pts of free value on KC!
+  const shiftVal = Math.round((cbs - live) * 10) / 10;
+  const advantagePts = Math.abs(shiftVal);
+
+  let label = 'Stable Line (0.0)';
+  let badgeClass = 'steam-neutral';
+  let favoredTeam = '';
+
+  if (shiftVal > 0) {
+    favoredTeam = game.homeAbbr;
+    if (advantagePts >= 1.5) {
+      badgeClass = 'steam-hot';
+      label = `🔥 +${advantagePts} pts CLV on ${game.homeAbbr}`;
+    } else {
+      badgeClass = 'steam-fav';
+      label = `📈 +${advantagePts} pts on ${game.homeAbbr}`;
+    }
+  } else if (shiftVal < 0) {
+    favoredTeam = game.awayAbbr;
+    if (advantagePts >= 1.5) {
+      badgeClass = 'steam-hot';
+      label = `🔥 +${advantagePts} pts CLV on ${game.awayAbbr}`;
+    } else {
+      badgeClass = 'steam-fav';
+      label = `📈 +${advantagePts} pts on ${game.awayAbbr}`;
+    }
+  }
+
+  return { shiftVal, advantagePts, favoredTeam, label, badgeClass, cbs, live };
+}
+
 // Get current week's games
 function getCurrentGames() {
   return state.weeks[state.currentWeek] || [];
@@ -673,6 +709,35 @@ function updateMetrics() {
 
   const avgEdge = totalGames > 0 ? (edgeSum / totalGames).toFixed(1) : '0.0';
   metricAvgEdge.textContent = `+${avgEdge} pts`;
+
+  // Update Top Steam Metric
+  const metricTopSteam = document.getElementById('metricTopSteam');
+  const metricTopSteamDelta = document.getElementById('metricTopSteamDelta');
+  const metricTopSteamDesc = document.getElementById('metricTopSteamDesc');
+
+  if (metricTopSteam) {
+    let topSteamGame = null;
+    let maxShift = -1;
+    games.forEach(g => {
+      const shift = calculateLineShift(g);
+      if (shift.advantagePts > maxShift) {
+        maxShift = shift.advantagePts;
+        topSteamGame = { game: g, shift };
+      }
+    });
+
+    if (topSteamGame && maxShift > 0) {
+      metricTopSteam.textContent = `${topSteamGame.shift.favoredTeam} (+${maxShift})`;
+      metricTopSteamDelta.textContent = `+${maxShift} pts Steam`;
+      const cbsStr = topSteamGame.shift.cbs > 0 ? `+${topSteamGame.shift.cbs}` : `${topSteamGame.shift.cbs}`;
+      const liveStr = topSteamGame.shift.live > 0 ? `+${topSteamGame.shift.live}` : `${topSteamGame.shift.live}`;
+      metricTopSteamDesc.textContent = `CBS: ${cbsStr} ➔ Vegas: ${liveStr}`;
+    } else {
+      metricTopSteam.textContent = 'Stable';
+      metricTopSteamDelta.textContent = '0.0 pts';
+      metricTopSteamDesc.textContent = 'Lines matched CBS locked sheet';
+    }
+  }
 }
 
 // Render All Games
@@ -698,6 +763,8 @@ function renderGames() {
       return analysis.spreadEdge >= 2.0;
     } else if (state.activeTab === 'cbs') {
       return analysis.clvEdge >= 1.0;
+    } else if (state.activeTab === 'steam') {
+      return calculateLineShift(g).advantagePts >= 0.5;
     } else if (state.activeTab === 'underdogs') {
       return (analysis.recommendedTeam === 'AWAY' && g.homeSpread < 0) ||
              (analysis.recommendedTeam === 'HOME' && g.homeSpread > 0);
@@ -705,7 +772,7 @@ function renderGames() {
     return true;
   });
 
-  // Sort if on ranked tab or CBS CLV tab
+  // Sort if on ranked tab, CBS CLV tab, or Steam tab
   if (state.activeTab === 'ranked') {
     filtered.sort((a, b) => {
       const rankA = picks[a.id]?.rank || 0;
@@ -717,6 +784,12 @@ function renderGames() {
       const edgeA = calculateGameEdge(a).clvEdge;
       const edgeB = calculateGameEdge(b).clvEdge;
       return edgeB - edgeA; // Highest CLV first
+    });
+  } else if (state.activeTab === 'steam') {
+    filtered.sort((a, b) => {
+      const shiftA = calculateLineShift(a).advantagePts;
+      const shiftB = calculateLineShift(b).advantagePts;
+      return shiftB - shiftA; // Highest line shift first
     });
   }
 
@@ -742,6 +815,12 @@ function renderGames() {
     const awaySpread = -game.homeSpread;
     const awaySpreadStr = awaySpread > 0 ? `+${awaySpread}` : `${awaySpread}`;
     const homeSpreadStr = game.homeSpread > 0 ? `+${game.homeSpread}` : `${game.homeSpread}`;
+
+    const shiftMeta = calculateLineShift(game);
+    const cbsSpreadVal = game.cbsLockedSpread !== undefined ? game.cbsLockedSpread : game.homeSpread;
+    const cbsSpreadStr = cbsSpreadVal > 0 ? `+${cbsSpreadVal}` : `${cbsSpreadVal}`;
+    const liveSpreadVal = game.currentMarketSpread !== undefined ? game.currentMarketSpread : cbsSpreadVal;
+    const liveSpreadStr = liveSpreadVal > 0 ? `+${liveSpreadVal}` : `${liveSpreadVal}`;
 
     const awayMeta = TEAM_DATA[game.awayAbbr] || { color: '#2563eb' };
     const homeMeta = TEAM_DATA[game.homeAbbr] || { color: '#dc2626' };
@@ -772,6 +851,22 @@ function renderGames() {
             ${rankOptionsHtml}
           </select>
         </div>
+      </div>
+
+      <!-- Live Line Movement Box -->
+      <div class="line-movement-box">
+        <div class="line-compare-wrap">
+          <span class="line-tag-cbs">🔒 CBS: ${cbsSpreadStr}</span>
+          <span class="line-tag-arrow">➔</span>
+          <span class="line-tag-live">Vegas: ${liveSpreadStr}</span>
+          <span class="stepper-btn-group">
+            <button class="mini-step-btn line-step-down" data-game-id="${game.id}" title="Nudge live line -0.5">-</button>
+            <button class="mini-step-btn line-step-up" data-game-id="${game.id}" title="Nudge live line +0.5">+</button>
+          </span>
+        </div>
+        <span class="line-delta-pill ${shiftMeta.badgeClass}">
+          ${shiftMeta.label}
+        </span>
       </div>
 
       <div class="teams-wrapper">
@@ -909,6 +1004,37 @@ function attachCardEvents() {
       e.stopPropagation();
       const gameId = btn.dataset.gameId;
       openAnalysisModal(gameId);
+    });
+  });
+
+  // Live line stepper buttons
+  document.querySelectorAll('.line-step-down').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const gameId = btn.dataset.gameId;
+      const game = getCurrentGames().find(g => g.id === gameId);
+      if (game) {
+        if (game.currentMarketSpread === undefined) game.currentMarketSpread = game.homeSpread;
+        game.currentMarketSpread = Math.round((parseFloat(game.currentMarketSpread) - 0.5) * 10) / 10;
+        saveState();
+        renderGames();
+        showToast(`${game.awayAbbr} @ ${game.homeAbbr} live spread updated to ${game.currentMarketSpread}`);
+      }
+    });
+  });
+
+  document.querySelectorAll('.line-step-up').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const gameId = btn.dataset.gameId;
+      const game = getCurrentGames().find(g => g.id === gameId);
+      if (game) {
+        if (game.currentMarketSpread === undefined) game.currentMarketSpread = game.homeSpread;
+        game.currentMarketSpread = Math.round((parseFloat(game.currentMarketSpread) + 0.5) * 10) / 10;
+        saveState();
+        renderGames();
+        showToast(`${game.awayAbbr} @ ${game.homeAbbr} live spread updated to ${game.currentMarketSpread}`);
+      }
     });
   });
 }
