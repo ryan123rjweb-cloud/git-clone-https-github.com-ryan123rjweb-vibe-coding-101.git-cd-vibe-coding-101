@@ -1075,7 +1075,11 @@ function initEventListeners() {
     const games = getCurrentGames();
     let updatedCount = 0;
     const lines = raw.split('\n');
+
     lines.forEach(line => {
+      // Check for percentages like 65% or 35%
+      const pctMatches = line.match(/(\d{1,3})%/g);
+
       games.forEach(g => {
         const homeMatch = line.toLowerCase().includes(g.homeTeam.toLowerCase()) || line.includes(g.homeAbbr);
         const awayMatch = line.toLowerCase().includes(g.awayTeam.toLowerCase()) || line.includes(g.awayAbbr);
@@ -1089,13 +1093,17 @@ function initEventListeners() {
               updatedCount++;
             }
           }
+          if (pctMatches && pctMatches.length >= 2) {
+            g.awayPickPct = pctMatches[0];
+            g.homePickPct = pctMatches[1];
+          }
         }
       });
     });
     saveState();
     renderGames();
     cbsModal.classList.add('hidden');
-    showToast(`Synced ${updatedCount} locked spreads from CBS!`);
+    showToast(`Synced ${updatedCount} locked spreads and pick percentages from CBS!`);
   });
 
   copyCbsFormattedPicks.addEventListener('click', () => {
