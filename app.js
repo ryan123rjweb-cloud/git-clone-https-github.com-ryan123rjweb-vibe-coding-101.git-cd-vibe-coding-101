@@ -360,11 +360,6 @@ function calculateGameEdge(game) {
     explanation: `${recommendedAbbr} ${recommendedSpread} holds +${totalConfidenceEdge} pt model edge.`
   };
 }
-    badgeType,
-    badgeLabel,
-    explanation: `${recommendedAbbr} ${recommendedSpread} holds +${totalConfidenceEdge} pt model edge.`
-  };
-}
 
 // Get current week's games
 function getCurrentGames() {
