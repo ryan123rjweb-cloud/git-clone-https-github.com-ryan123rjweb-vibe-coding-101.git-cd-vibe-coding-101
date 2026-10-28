@@ -197,6 +197,19 @@ body {
   transform: translateY(-1px);
 }
 
+.btn-vegas {
+  background: linear-gradient(135deg, #d97706, #b45309);
+  color: #ffffff;
+  border: 1px solid rgba(251, 191, 36, 0.4);
+  box-shadow: 0 2px 8px rgba(217, 119, 6, 0.35);
+}
+
+.btn-vegas:hover {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.45);
+  transform: translateY(-1px);
+}
+
 .btn-secondary {
   background-color: var(--bg-surface-elevated);
   color: var(--text-main);

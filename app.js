@@ -646,6 +646,14 @@ const applyCbsPasteBtn = document.getElementById('applyCbsPasteBtn');
 const cbsBookmarkletLink = document.getElementById('cbsBookmarkletLink');
 const copyCbsFormattedPicks = document.getElementById('copyCbsFormattedPicks');
 
+const liveOddsModal = document.getElementById('liveOddsModal');
+const liveOddsBtn = document.getElementById('liveOddsBtn');
+const closeLiveOddsModal = document.getElementById('closeLiveOddsModal');
+const oddsApiKeyInput = document.getElementById('oddsApiKeyInput');
+const bookmakerSelect = document.getElementById('bookmakerSelect');
+const testMockOddsBtn = document.getElementById('testMockOddsBtn');
+const fetchLiveOddsBtn = document.getElementById('fetchLiveOddsBtn');
+
 const simModal = document.getElementById('simModal');
 const closeSimModal = document.getElementById('closeSimModal');
 const runSimBtn = document.getElementById('runSimBtn');
@@ -1368,12 +1376,94 @@ function initEventListeners() {
   closeExportModal.addEventListener('click', () => exportModal.classList.add('hidden'));
   closeSimModal.addEventListener('click', () => simModal.classList.add('hidden'));
   closeCbsModal.addEventListener('click', () => cbsModal.classList.add('hidden'));
+  closeLiveOddsModal.addEventListener('click', () => liveOddsModal.classList.add('hidden'));
 
   // Close when clicking backdrop
-  [analysisModal, gameModal, exportModal, simModal, cbsModal].forEach(modal => {
+  [analysisModal, gameModal, exportModal, simModal, cbsModal, liveOddsModal].forEach(modal => {
     modal.addEventListener('click', (e) => {
       if (e.target === modal) modal.classList.add('hidden');
     });
+  });
+
+  // Live Odds Modal
+  liveOddsBtn.addEventListener('click', () => {
+    oddsApiKeyInput.value = localStorage.getItem('gridiron_odds_api_key') || '';
+    bookmakerSelect.value = localStorage.getItem('gridiron_bookmaker') || 'draftkings';
+    liveOddsModal.classList.remove('hidden');
+  });
+
+  // Test live moves simulation
+  testMockOddsBtn.addEventListener('click', () => {
+    const games = getCurrentGames();
+    games.forEach(g => {
+      const shiftChoices = [-1.0, -0.5, 0, 0.5, 1.0, 1.5];
+      const randomShift = shiftChoices[Math.floor(Math.random() * shiftChoices.length)];
+      const base = g.cbsLockedSpread !== undefined ? g.cbsLockedSpread : g.homeSpread;
+      g.currentMarketSpread = Math.round((base + randomShift) * 10) / 10;
+    });
+    saveState();
+    renderGames();
+    liveOddsModal.classList.add('hidden');
+    showToast('🎲 Simulated live market shifts across matchups!');
+  });
+
+  // Fetch Live Odds from The Odds API
+  fetchLiveOddsBtn.addEventListener('click', async () => {
+    const apiKey = oddsApiKeyInput.value.trim();
+    if (!apiKey) {
+      showToast('Please enter your free The Odds API key first.');
+      return;
+    }
+    localStorage.setItem('gridiron_odds_api_key', apiKey);
+    const bookmaker = bookmakerSelect.value;
+    localStorage.setItem('gridiron_bookmaker', bookmaker);
+
+    fetchLiveOddsBtn.disabled = true;
+    fetchLiveOddsBtn.textContent = '⏳ Fetching live lines...';
+
+    try {
+      const res = await fetch(`https://api.the-odds-api.com/v4/sports/americanfootball_nfl/odds/?apiKey=${apiKey}&regions=us&markets=spreads&oddsFormat=american&bookmakers=${bookmaker}`);
+      if (!res.ok) {
+        throw new Error(`API returned status ${res.status}`);
+      }
+      const data = await res.json();
+      const games = getCurrentGames();
+      let matchedCount = 0;
+
+      data.forEach(event => {
+        const homeName = event.home_team.toLowerCase();
+        const awayName = event.away_team.toLowerCase();
+
+        games.forEach(g => {
+          const matchHome = homeName.includes(g.homeTeam.toLowerCase()) || homeName.includes(g.homeAbbr.toLowerCase());
+          const matchAway = awayName.includes(g.awayTeam.toLowerCase()) || awayName.includes(g.awayAbbr.toLowerCase());
+
+          if (matchHome && matchAway) {
+            const bm = event.bookmakers.find(b => b.key === bookmaker) || event.bookmakers[0];
+            if (bm) {
+              const spreadMarket = bm.markets.find(m => m.key === 'spreads');
+              if (spreadMarket) {
+                const homeOutcome = spreadMarket.outcomes.find(o => o.name.toLowerCase() === homeName);
+                if (homeOutcome && homeOutcome.point !== undefined) {
+                  g.currentMarketSpread = homeOutcome.point;
+                  matchedCount++;
+                }
+              }
+            }
+          }
+        });
+      });
+
+      saveState();
+      renderGames();
+      liveOddsModal.classList.add('hidden');
+      showToast(`✅ Synced ${matchedCount} matchups from ${bookmaker.toUpperCase()} live lines!`);
+    } catch (err) {
+      showToast(`Error fetching odds: ${err.message}`);
+    } finally {
+      fetchLiveOddsBtn.disabled = false;
+      fetchLiveOddsBtn.textContent = '⚡ Fetch Live Sportsbook Lines';
+    }
   });
 
   // CBS Modal & Bookmarklet Setup

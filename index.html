@@ -38,6 +38,9 @@
           <button id="autoSuggestBtn" class="btn btn-primary" title="Sort all games by algorithmic model edge">
             <span class="btn-icon">⚡</span> Auto-Rank by Suggestions
           </button>
+          <button id="liveOddsBtn" class="btn btn-vegas" title="Fetch Live Sportsbook Spreads from DraftKings / FanDuel">
+            <span class="btn-icon">📡</span> Live Vegas Odds
+          </button>
           <button id="cbsModalBtn" class="btn btn-cbs" title="CBS Sports Locked Spreads Mode & Sync Helper">
             <span class="btn-icon">🔒</span> CBS Pool Sync
           </button>
@@ -276,6 +279,53 @@
           </h4>
           <p class="export-instructions">Quick list formatted to match the order of CBS Sports pick sheets:</p>
           <button id="copyCbsFormattedPicks" class="btn btn-secondary btn-sm">Copy CBS Pick Sheet Order</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Live Vegas Odds Modal -->
+  <div id="liveOddsModal" class="modal-overlay hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div>
+          <h3 class="modal-title">📡 Live Sportsbook Odds Sync</h3>
+          <p class="modal-subtitle">Auto-fetch real-time spreads from DraftKings, FanDuel & BetMGM</p>
+        </div>
+        <button id="closeLiveOddsModal" class="modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="cbs-info-banner" style="background: linear-gradient(135deg, rgba(234, 88, 12, 0.15) 0%, rgba(180, 83, 9, 0.2) 100%); border-color: rgba(249, 115, 22, 0.35);">
+          <div class="cbs-badge-icon">🎰</div>
+          <div>
+            <strong>Automated Sportsbook Spreads via The Odds API:</strong>
+            <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem;">
+              Connects directly to major US sportsbooks (DraftKings, FanDuel, BetMGM) to update your Live Vegas lines in 1 click. Includes <strong>500 free requests per month</strong> (enough for the whole football season).
+            </p>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-top: 0.5rem;">
+          <label style="font-weight: 700; color: #f8fafc;">The Odds API Key</label>
+          <input type="password" id="oddsApiKeyInput" placeholder="Enter your free API key" class="form-input" style="font-family: var(--font-mono);">
+          <span style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem;">
+            Don't have a free key? Get one in 10 seconds (no credit card needed) at <a href="https://the-odds-api.com/" target="_blank" style="color: #38bdf8;">the-odds-api.com</a>
+          </span>
+        </div>
+
+        <div class="form-group">
+          <label>Preferred Sportsbook Bookmaker</label>
+          <select id="bookmakerSelect" class="form-select">
+            <option value="draftkings">DraftKings</option>
+            <option value="fanduel">FanDuel</option>
+            <option value="betmgm">BetMGM</option>
+            <option value="bovada">Bovada</option>
+          </select>
+        </div>
+
+        <div style="display: flex; gap: 0.75rem; justify-content: flex-end; margin-top: 0.75rem;">
+          <button id="testMockOddsBtn" class="btn btn-secondary">🎲 Test Live Line Moves</button>
+          <button id="fetchLiveOddsBtn" class="btn btn-primary">⚡ Fetch Live Sportsbook Lines</button>
         </div>
       </div>
     </div>
